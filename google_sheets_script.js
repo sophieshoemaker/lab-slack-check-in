@@ -4,20 +4,18 @@ const WARN_IF_NO_CHECK_OUT = false // options: true or false
 const CHECK_IN_CHANNEL = "#lab-check-in-log" //change this to what your desired channel is called
 const url = "https://hooks.slack.com/services/XXXX/XXX"; //put your webhook url here
 
-const BLUE = "alanine"
-const RED = "tyrosine"
-const YELLOW = "leucine"
-const GREEN = "proline"
-const PURPLE = "glutamine"
-var stations = [BLUE, RED, YELLOW, GREEN, PURPLE]
-const NUM_SHIFTS = 4
+const BLUE = "blue"
+const RED = "red"
+const YELLOW = "yellow"
+const GREEN = "green"
+var stations = [BLUE, RED, YELLOW, GREEN]
+const NUM_SHIFTS = 3
 
 const BLUE_COL = 2
 const RED_COL = 5
 const YELLOW_COL = 8
 const GREEN_COL = 11
-const PURPLE_COL = 14
-const COLS = [BLUE_COL, RED_COL, YELLOW_COL, GREEN_COL, PURPLE_COL]
+const COLS = [BLUE_COL, RED_COL, YELLOW_COL, GREEN_COL]
 
 //shift check-out times (only needed if WARN_IF_NO_CHECK_OUT is true)
 const CHECKOUT_1 = 13
