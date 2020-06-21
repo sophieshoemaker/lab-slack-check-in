@@ -15,16 +15,14 @@ This guide and the scripts were developed by Sophie Shoemaker, for any problems,
   1. Delete all of the text in the existing script (function MyFunction … etc) and copy in this [script](./google_sheets_script.js). 
       1. You can name this script at the top anything you want. It is not important.
       1. Save this
-      1. This is the place that if you want to rename your stations, you should do it now. You will see these lines starting at line 7: ![station names](./README_images/StationNames.png)
-      1. Leave the variable names (BLUE, RED, YELLOW, GREEN) but change the part in the quotes. The order they are in is the order they appear in the sheet. So if you wanted your stations to be named Alanine, Tyrosine, Leucine and Proline you would want to change these lines to look like the following picture. DO NOT CHANGE ANY OTHER LINES.![renamed stations](./README_images/StationsRenamed.png)
+      1. This is the place that if you want to rename your stations, you should do it now. You will see these lines starting at line 7: <br />![station names](./README_images/StationNames.png)
+      1. Leave the variable names (BLUE, RED, YELLOW, GREEN) but change the part in the quotes. The order they are in is the order they appear in the sheet. So if you wanted your stations to be named Alanine, Tyrosine, Leucine and Proline you would want to change these lines to look like the following picture. DO NOT CHANGE ANY OTHER LINES.<br />![renamed stations](./README_images/StationsRenamed.png)
       1. If you make these changes make sure to save your script. 
 
 #### Step 3: Integrate this function with slack
   1. Go to Publish>Deploy as web app and a window should pop up
-  1. Fill it out to look like this (make sure it says “Anyone, even anonymous” under “Who has access to this app:")
-  ![Deploy Web App](./README_images/InitialDeploy.png)
-	1. Whenever you make changes to the script you must go back to Publish>Deploy and then fill out the pop-up making sure the Project version is “New” every time. It is good practice to include a descriptive message of what you changed. Make sure everything else is still filled out.
-   ![Second Deploy](./README_images/SecondDeploy.png)
+  1. Fill it out to look like this (make sure it says “Anyone, even anonymous” under “Who has access to this app:")<br />![Deploy Web App](./README_images/InitialDeploy.png)<br />
+      1. Whenever you make changes to the script you must go back to Publish>Deploy and then fill out the pop-up making sure the Project version is “New” every time. It is good practice to include a descriptive message of what you changed. Make sure everything else is still filled out.<br />![Second Deploy](./README_images/SecondDeploy.png)
   1. Click deploy (it may ask you to login to your account to check permissions)
   1. Copy the URL in the box and click okay.
   1. Go to the [Slack API homepage](https://api.slack.com/) and click “Start Building”
@@ -32,43 +30,32 @@ This guide and the scripts were developed by Sophie Shoemaker, for any problems,
   1. Click “Add features and functionality”
   1. Click “Slash Commands”
   1. Click “Create New Command”
-  1. Fill it out to look like this, pasting in the URL that you copied in step 4 of this part:
-  ![Create Slash Command](./README_images/CreateSlashCommand.png)
+  1. Fill it out to look like this, pasting in the URL that you copied in step 4 of this part:<br />![Create Slash Command](./README_images/CreateSlashCommand.png)
   1. Click Save
   1. Click “Create New Command”
-  1. Fill it out to look like this, pasting in the URL that you copied in step 4 of this part:
-  ![Create CheckOut](./README_images/CreateCheckOut.png)
+  1. Fill it out to look like this, pasting in the URL that you copied in step 4 of this part:<br />![Create CheckOut](./README_images/CreateCheckOut.png)
   1. Click Save
-  1. On the left hand side click ‘Basic Information’
-  ![BasicInfo](./README_images/BasicInformation.png)
+  1. On the left hand side click ‘Basic Information’<br />![BasicInfo](./README_images/BasicInformation.png)
   1. Click on “Install your app to your workspace” (middle of page) and then click on the big green button that says “Install App to Workspace”
   1. You should be taken to a new page requesting permission to access the Slack workspace. Click “Allow”
 #### Step 4: Test your app! 
   1. Go to your slack workspace. From ANY CHANNEL (would recommend either your Slackbot channel or your Direct message to yourself to reduce clutter)
-  1. Put in a test check-in 
-  
-![CheckIn](./README_images/CheckIn.png)  
-  	1. You should see the following message which indicates your check-in was successful.
-
-![Success](./README_images/SuccessfulCheckIn.png)  
-  	1. If you don’t see this message, it should give you a helpful error message of why it did not work. If it is a bunch of incomprehensible nonsense, make a github issue to help troubleshoot. 
+  1. Put in a test check-in <br />![CheckIn](./README_images/CheckIn.png)<br />  
+      1. You should see the following message which indicates your check-in was successful.<br />![Success](./README_images/SuccessfulCheckIn.png)<br />  
+  	  1. If you don’t see this message, it should give you a helpful error message of why it did not work. If it is a bunch of incomprehensible nonsense, make a github issue to help troubleshoot. 
   1. Go to the Google Sheet and see if your entry was logged on BOTH the “Current Day” and “Event Log” tabs.
-        a. Current Day Sheet: 
-        ![Current Day](./README_images/CurrentDaySheet.png)        
-        b. Event Log Sheet:
-        ![Event Log](./README_images/EventLogSheet.png)      
+  	    1. Current Day Sheet: <br />![Current Day](./README_images/CurrentDaySheet.png)        
+        1. Event Log Sheet:<br />![Event Log](./README_images/EventLogSheet.png)      
   1. If you do not see these changes in your sheet, something is wrong. Maybe go back through the steps to make sure you didn’t miss something. Otherwise create a github issue.
   1. Similarly test your /check-out function (same way as above, but with the /check-out command). You should get a check-out message that says “See you next time”
 
 #### Step 5: Set up the overnight autoclear
   1. Naturally at the end of the day, we will want to shift down responses on the “Current Day” sheet (so we have a 1 day log of who was where) so we are ready for the next day. 
   1. Go back to your Google Sheets App (created in Step 2) 
-  1. In the tool bar click the “Current Triggers” button (it looks like a clock speech bubble)
-  ![trigger button](./README_images/Triggers.png)
+  1. In the tool bar click the “Current Triggers” button (it looks like a clock speech bubble)<br />![trigger button](./README_images/Triggers.png)
   1. This should take you to the “Triggers” page which currently should be empty. 
   1. Click “+ Add Trigger”
-  1. Fill out the “Add Trigger for Testing” with the following parameters:
-  ![Add Trigger](./README_images/AddTrigger.png)  
+  1. Fill out the “Add Trigger for Testing” with the following parameters:<br />![Add Trigger](./README_images/AddTrigger.png)  
   1. Click Save
   1. To test this part, I would recommend making some check-in’s and outs and then tomorrow morning checking the sheet to make sure that the daily entries were moved down to the previous spot. The dates on the sheet should also be updated. 
     1. Note this functionality does not change anything on the “Event Log” tab
@@ -92,8 +79,7 @@ Set the const variable at the top of Google Sheets Script called “SEND_TO_SLAC
   1. Now you need to set triggers for checking similar to what you did in Step 5 with the autoClear.
       1. First go to triggers
       1. Click the “+ Add Trigger” button in the bottom right corner.
-      1. Fill out the options to look like this:
-  ![no Check out](./README_images/noCheckOutTrigger.png)  
+      1. Fill out the options to look like this:<br />![no Check out](./README_images/noCheckOutTrigger.png)  
       1. Change the “Select time of day” to match the hour at which your shift ends
       1. Repeat b and c for the other times that your shifts end. (i.e. if you have 3 shifts, you will need 3 triggers, one at each shift end time)
   1. You will need to save the script and publish it as described before.
@@ -107,12 +93,9 @@ Set the const variable at the top of Google Sheets Script called “SEND_TO_SLAC
   1. Choose an option, if it is ALLOW or FORBID, change the const variable “OVERRIDE_OPT” at the top of the shet. 
 
 #### If you want to change the number of stations
-  1. This is a bit more involved. If you want less stations, it’s fairly simple. Just delete the extra const variables (start with GREEN, then YELLOW, then RED) and then also delete them from the var stations list. This should just not allow anyone to check into the other stations. You can then delete these columns from the google sheet. So the top of the script should look like this with your station names.
-	![less stations](./README_images/RemoveStations.png)
-  1. If you want to add stations you will have to add more const variables for the stations and then add them to the list. You will also have to add the column that this station should report to in a variable called something like PURPLE_COL. Then in the getStationColumn function you will have to add the station name and column to the switch statement. So for example if I added 1 station my script would look like this starting at line 7:
-  ![more stations](./README_images/AddStations.png)
-  1. Then you would just need to add the new column headers for the new station starting at column 14 (N). 
-	![Sheet Add Stations](./README_images/AddedStationOnSheet.png)
+  1. This is a bit more involved. If you want less stations, it’s fairly simple. Just delete the extra const variables (start with GREEN, then YELLOW, then RED) and then also delete them from the var stations list. This should just not allow anyone to check into the other stations. You can then delete these columns from the google sheet. So the top of the script should look like this with your station names.<br />![less stations](./README_images/RemoveStations.png)
+  1. If you want to add stations you will have to add more const variables for the stations and then add them to the list. You will also have to add the column that this station should report to in a variable called something like PURPLE_COL. Then in the getStationColumn function you will have to add the station name and column to the switch statement. So for example if I added 1 station my script would look like this starting at line 7:<br />![more stations](./README_images/AddStations.png)
+  1. Then you would just need to add the new column headers for the new station starting at column 14 (N). <br />![Sheet Add Stations](./README_images/AddedStationOnSheet.png)
 
 #### If you want to change the number of shifts
 Currently this script only supports numbers of shifts between 1 and 5. Simply change the NUM_SHIFTS variable in line 13 to reflect the number of shifts you want. Then make sure to change the row titles in your Google Sheet.
