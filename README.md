@@ -22,13 +22,9 @@ This guide and the scripts were developed by Sophie Shoemaker, for any problems,
 #### Step 3: Integrate this function with slack
   1. Go to Publish>Deploy as web app and a window should pop up
   1. Fill it out to look like this (make sure it says “Anyone, even anonymous” under “Who has access to this app:")
-  
-  <img src="./README_images/InitialDeploy.png" width="256" height="256" title="Initial Deploy">
-  
-   a. Whenever you make changes to the script you must go back to Publish>Deploy and then fill out the pop-up making sure the Project version is “New” every time. It is good practice to include a descriptive message of what you changed. Make sure everything else is still filled out.
-   
-  <img src="./README_images/SecondDeploy.png" width="256" height="256" title="Initial Deploy">
-
+  ![Deploy Web App](./README_images/InitialDeploy.png)
+	1. Whenever you make changes to the script you must go back to Publish>Deploy and then fill out the pop-up making sure the Project version is “New” every time. It is good practice to include a descriptive message of what you changed. Make sure everything else is still filled out.
+   ![Second Deploy](./README_images/SecondDeploy.png)
   1. Click deploy (it may ask you to login to your account to check permissions)
   1. Copy the URL in the box and click okay.
   1. Go to the [Slack API homepage](https://api.slack.com/) and click “Start Building”
@@ -37,38 +33,30 @@ This guide and the scripts were developed by Sophie Shoemaker, for any problems,
   1. Click “Slash Commands”
   1. Click “Create New Command”
   1. Fill it out to look like this, pasting in the URL that you copied in step 4 of this part:
-  <img src="./README_images/CreateSlashCommand.png" width="400" height="256" title="Create Command">
-
+  ![Create Slash Command](./README_images/CreateSlashCommand.png)
   1. Click Save
   1. Click “Create New Command”
   1. Fill it out to look like this, pasting in the URL that you copied in step 4 of this part:
-  
-  <img src="./README_images/CreateCheckOut.png" width="400" height="256" title="Create Command">
-
+  ![Create CheckOut](./README_images/CreateCheckOut.png)
   1. Click Save
   1. On the left hand side click ‘Basic Information’
-  
-  <img src="./README_images/BasicInformation.png" width="350" height="256" title="Create Command">
-
+  ![BasicInfo](./README_images/BasicInformation.png)
   1. Click on “Install your app to your workspace” (middle of page) and then click on the big green button that says “Install App to Workspace”
   1. You should be taken to a new page requesting permission to access the Slack workspace. Click “Allow”
 #### Step 4: Test your app! 
   1. Go to your slack workspace. From ANY CHANNEL (would recommend either your Slackbot channel or your Direct message to yourself to reduce clutter)
   1. Put in a test check-in 
-  <img src="./README_images/CheckIn.png" width="400" height="256" title="Check In">
   
-  a. You should see the following message which indicates your check-in was successful.
-    <img src="./README_images/SuccessfulCheckIn.png" width="400" height="256" title="Success">
-  b. If you don’t see this message, it should give you a helpful error message of why it did not work. If it is a bunch of incomprehensible nonsense, make a github issue to help troubleshoot. 
+![CheckIn](./README_images/CheckIn.png)  
+  	1. You should see the following message which indicates your check-in was successful.
+
+![Success](./README_images/SuccessfulCheckIn.png)  
+  	1. If you don’t see this message, it should give you a helpful error message of why it did not work. If it is a bunch of incomprehensible nonsense, make a github issue to help troubleshoot. 
   1. Go to the Google Sheet and see if your entry was logged on BOTH the “Current Day” and “Event Log” tabs.
         a. Current Day Sheet: 
-        
-        <img src="./README_images/CurrentDaySheet.png" width="400" height="256" title="Current Day">
-      
+        ![Current Day](./README_images/CurrentDaySheet.png)        
         b. Event Log Sheet:
-        
-        <img src="./README_images/EventLogSheet.png" width="400" height="150" title="Event Log">
-      
+        ![Event Log](./README_images/EventLogSheet.png)      
   1. If you do not see these changes in your sheet, something is wrong. Maybe go back through the steps to make sure you didn’t miss something. Otherwise create a github issue.
   1. Similarly test your /check-out function (same way as above, but with the /check-out command). You should get a check-out message that says “See you next time”
 
@@ -80,8 +68,7 @@ This guide and the scripts were developed by Sophie Shoemaker, for any problems,
   1. This should take you to the “Triggers” page which currently should be empty. 
   1. Click “+ Add Trigger”
   1. Fill out the “Add Trigger for Testing” with the following parameters:
-  <img src="./README_images/AddTrigger.png" width="400" height="400" title="Trigger Parameters">
-  
+  ![Add Trigger](./README_images/AddTrigger.png)  
   1. Click Save
   1. To test this part, I would recommend making some check-in’s and outs and then tomorrow morning checking the sheet to make sure that the daily entries were moved down to the previous spot. The dates on the sheet should also be updated. 
     1. Note this functionality does not change anything on the “Event Log” tab
@@ -106,7 +93,7 @@ Set the const variable at the top of Google Sheets Script called “SEND_TO_SLAC
       1. First go to triggers
       1. Click the “+ Add Trigger” button in the bottom right corner.
       1. Fill out the options to look like this:
-  <img src="./README_images/noCheckOutTrigger.png" width="400" height="400" title="No CO Trigger Parameters">
+  ![no Check out](./README_images/noCheckOutTrigger.png)  
       1. Change the “Select time of day” to match the hour at which your shift ends
       1. Repeat b and c for the other times that your shifts end. (i.e. if you have 3 shifts, you will need 3 triggers, one at each shift end time)
   1. You will need to save the script and publish it as described before.
