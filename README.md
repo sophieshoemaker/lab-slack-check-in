@@ -1,4 +1,4 @@
-# Slack-Google Sheets Check-In Integration Instructions
+# Slack and Google Sheets Lab Check-In System Set Up
 
 This is a step by step instruction page on how to set up a custom slack [slash-function](https://slack.com/help/articles/201259356-Use-built-in-slash-commands) that is integrated with a google sheet to log when lab members check in and out of the lab. I developed this app based on this [tutorial](https://davidwalsh.name/using-slack-slash-commands-to-send-data-from-slack-into-google-sheets?fbclid=IwAR0ElV0MHSIeKEyq8XNgFpCgvM6K04Dz0uiCLYfs9p5s76ZeOCa3uRIl4ew). I am not a professional app developer, so please be understanding if something isn’t working exactly how you want it to. However, I tried my best to make it customizable and easy to use and I am always happy to help.
 
@@ -11,6 +11,8 @@ The script is currently configured to have 4 stations and 3 shifts. It is easily
 This guide and the scripts were developed by Sophie Shoemaker, for any problems, please create a [github issue](https://github.com/sophieshoemaker/lab-slack-check-in/issues/new). I am happy to help with set-up issues and minor customization issues. However, if you are requesting custom functionality I may decline your request out of time constraints. 
 
 If you find that this tool is really useful for your lab and you think that under non-pandemic times you might have offered to buy me a coffee, feel free to pass that sentiment on by [buying me a virtual coffee](https://www.buymeacoffee.com/sophieshoemaker). From now until the end of July, all donations received will be re-donated to [Community Resources for Science](https://www.crscience.org/) which is an amazing organization that provides resources and support for schools in the Bay Area to facilitate science experiences for students, especially for low-income schools. In this time of distance learning and inequity in STEM, their mission is of utmost importance. Help me help them!
+
+### Alright now onto the set up
 
 #### Step 1: Set up the Google Sheet
   1. Copy the format of this [google sheet](https://docs.google.com/spreadsheets/u/1/d/1419TJO3wTIyPg9dQ2lypU2KLrEhKIq-41rd6MTtmKKE/edit?usp=sharing). Make sure you get both tabs (‘Current Day’ and ‘Event Log’). If you want to change the name of your stations, you can on the ‘Current Day’ tab, but later you will have to also make a change within the script. Ensure you DO NOT change the positions of the columns or rows, this will break the script. The dates in cells A1 and A8 can be changed to the current days date and will continually update with the new dates. 
