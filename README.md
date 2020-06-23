@@ -78,7 +78,7 @@ Set the const variable at the top of Google Sheets Script called “SEND_TO_SLAC
   1. Copy the Webhook URL
   1. At the top of the google sheets script there is a variable called url, paste in the url you just copied.
   1. Test this out by checking someone in or out and see if it is posted to the channel you set up.
-    1. REMEMBER: Whenever you make changes to the script you must go back to Publish>Deploy and then fill out the pop-up making sure the Project version is “New” every time. It is good practice to include a descriptive message of what you changed. Make sure everything else is still filled out.<br />![Second Deploy](./README_images/SecondDeploy.png)
+      1. REMEMBER: Whenever you make changes to the script you must go back to Publish>Deploy and then fill out the pop-up making sure the Project version is “New” every time. It is good practice to include a descriptive message of what you changed. Make sure everything else is still filled out.<br />![Second Deploy](./README_images/SecondDeploy.png)
 
 #### Step 7: OPTIONAL have Slack notify you if someone does NOT check out of their shift
   1. This is an optional function that will check after each shift to make sure everyone has checked out and if they have not send a warning message to the same slack channel as in step 6. If you only want step 7 functionality and not step 6, follow the instructions of step 6 except for part 3.
@@ -93,7 +93,7 @@ Set the const variable at the top of Google Sheets Script called “SEND_TO_SLAC
       1. Repeat b and c for the other times that your shifts end. (i.e. if you have 3 shifts, you will need 3 triggers, one at each shift end time)
   1. You will need to save the script and publish it as described before.
   1. You should test this by signing yourself in and not out and then wait to see if the slack message is sent to the channel
-    1. REMEMBER: Whenever you make changes to the script you must go back to Publish>Deploy and then fill out the pop-up making sure the Project version is “New” every time. It is good practice to include a descriptive message of what you changed. Make sure everything else is still filled out.<br />![Second Deploy](./README_images/SecondDeploy.png)
+      
 
 #### Step 8: OPTIONAL decide how you want to handle check-in overrides
   1. So what happens if someone signs into the wrong station and then the other person needs to sign in. This is not a huge deal, because regardless of what the “Current Day” Sheet says, all of the check-in and check-out events are recorded in the Event Log, so you can sort out issues later. But you can decide how you want to handle what happens when this occurs. 
