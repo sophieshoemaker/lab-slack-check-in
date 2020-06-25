@@ -8,7 +8,7 @@ const BLUE = "blue"
 const RED = "red"
 const YELLOW = "yellow"
 const GREEN = "green"
-var stations = [BLUE, RED, YELLOW, GREEN]
+var stations = [BLUE.toLowerCase(), RED.toLowerCase(), YELLOW.toLowerCase(), GREEN.toLowerCase()]
 const NUM_SHIFTS = 3
 
 const BLUE_COL = 2
@@ -80,25 +80,25 @@ function autoClear(a) {
   // set up spreadsheet
   var col = 2
   var row_old = 3
-  var row_new = row_old + 7 
+  var row_new = row_old + 7
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName(SHEET_NAME);
   var sheet_curr_day = ss.getSheetByName(SHEET_CURR_DAY);
   var lastRow = sheet.getLastRow()
-  
+
   // copy previous day down
   var row_num = stations.length * 3
   var old_range = sheet_curr_day.getRange(row_old, col, NUM_SHIFTS, row_num)
   var new_range = sheet_curr_day.getRange(row_new, col, NUM_SHIFTS, row_num)
   old_range.moveTo(new_range)
-  
+
   //update dates
   var old_date = sheet_curr_day.getRange(1, 1, 1, 1).getValue()
   sheet_curr_day.getRange(8, 1, 1, 1).setValue(old_date)
   var new_date = new Date().toDateString()
   sheet_curr_day.getRange(1, 1, 1, 1).setValue(new_date)
-  
-  
+
+
 }
 
 
@@ -109,28 +109,28 @@ function handleCheckIn(e) {
   var sheet_curr_day = ss.getSheetByName(SHEET_CURR_DAY);
   var lastRow = sheet.getLastRow()
   var action = CHECK_IN_ACTION
-  
+
   // extract data from slack request
   var parameter = e.parameter;
-  var args = parameter.text.split(" "); 
+  var args = parameter.text.split(" ");
   if (args.length != 3) {
     return ContentService.createTextOutput('/check-in expects 3 arguments: [Name] [Station] [Shift Number]');
   }
   [name, station, shift] = extractArgs(args)
-  
+
   errorMsg = validateArgs(name, station, shift)
   if (errorMsg) {
     return errorMsg
   }
-  
-  column = getStationColumn(station)
+
+  column = getStationColumn(station.toLowerCase())
   if (!column) {
     return ContentService.createTextOutput('Something is wrong with your station');
   }
-  
+
   var row = shift + ROW_OFFSET
-  
-  var in_name = sheet_curr_day.getRange(row, column, 1, 1).getValue()  
+
+  var in_name = sheet_curr_day.getRange(row, column, 1, 1).getValue()
   var return_text = ''
   var update_override = true
   if ( name.toLowerCase() != in_name.toLowerCase() && in_name != '') {
@@ -152,17 +152,17 @@ function handleCheckIn(e) {
   } else {
     return_text =':female-scientist: Have a great day in Lab! :tada:'
   }
-  
+
   var checkInTime = new Date().toTimeString().split(' ')[0];
   var date = new Date().toDateString()
   var checkInDetails = [date, action, name, station, shift, checkInTime]
   var checkInDetailsCondensed = [name, checkInTime]
-  
+
   column = getStationColumn(station)
   if (!column) {
     return ContentService.createTextOutput('Something is wrong with your station');
   }
-  
+
   if (update_override) {
     sheet.getRange(lastRow + 1, 1, 1, 6).setValues([checkInDetails])
     sheet_curr_day.getRange(row, column, 1, 2).setValues([checkInDetailsCondensed])
@@ -180,7 +180,7 @@ function handleCheckOut(e) {
   var sheet_curr_day = ss.getSheetByName(SHEET_CURR_DAY);
   var lastRow = sheet.getLastRow()
   var action =  CHECK_OUT_ACTION
-  
+
   // extract data from slack request
   var parameter = e.parameter;
   var args = parameter.text.split(" ");
@@ -188,19 +188,19 @@ function handleCheckOut(e) {
     return ContentService.createTextOutput('/check-out expects 3 arguments: [Name] [Station] [Shift Number]');
   }
   [name, station, shift] = extractArgs(args)
-  
+
   errorMsg = validateArgs(name, station, shift)
   if (errorMsg) {
     return errorMsg
   }
-  
+
   column = getStationColumn(station)
   if (!column) {
     return ContentService.createTextOutput('Something is wrong with your station');
   }
-  
+
   var row = shift + ROW_OFFSET
-  
+
   //Alert User if their name does not match the name they are trying to check-out
   var in_name = sheet_curr_day.getRange(row, column, 1, 1).getValue()
   if (in_name == '') {
@@ -210,22 +210,22 @@ function handleCheckOut(e) {
     var errmsg = `You cannot check out of this station because ${in_name} is currently checked in. Double check your name spelling, station and shift number`;
     return ContentService.createTextOutput(errmsg);
   }
-  
-  
+
+
   // Write to the History sheet and Current Day Sheet
   var checkOutTime = new Date().toTimeString().split(' ')[0];
   var day = new Date().toDateString()
-  
+
   var checkOutDetails = [day, action, name, station, shift, checkOutTime]
   var checkOutDetailsCondensed = [checkOutTime]
-  
+
   sheet.getRange(lastRow + 1, 1, 1, 6).setValues([checkOutDetails])
   sheet_curr_day.getRange(row, column + 2, 1, 1).setValues([checkOutDetailsCondensed])
-  
+
   if (SEND_TO_SLACK) {
     sendToSlack(checkOutDetails)
   }
-  
+
   return ContentService.createTextOutput(':wave: See you next time! :tada:');
 }
 
@@ -233,7 +233,7 @@ function handleCheckOut(e) {
 function getStationColumn(station) {
   var i;
   for (i = 0; i < stations.length; i++) {
-    if (station == stations[i]) {
+    if (station.toLowerCase() == stations[i]) {
       return COLS[i]
     }
   }
@@ -242,18 +242,18 @@ function getStationColumn(station) {
 
 function extractArgs(args) {
   var name = args[0]
-  var station = args[1].toLowerCase()
+  var station = args[1]
   var shift = parseInt(args[2])
-  
+
   return [name, station, shift]
 }
 
 function validateArgs(name, station, shift) {
   // Alert user if station is not in the list of stations
-  if (!stations.includes(station)) {
+  if (!stations.includes(station.toLowerCase())) {
     return ContentService.createTextOutput('Station must be one of: \n' + stations.join(' '));
   }
-  
+
   // Alert user if shift is not valid
   if (shift > NUM_SHIFTS || shift < 1) {
     var msg = "Shift must be between 1 and " + NUM_SHIFTS
@@ -292,19 +292,16 @@ function sendToSlack(details) {
     "text": "Please contact Sophie if you see this. What is in the details: " + details
     };
   }
-  
+
   var options = {
     "method": "post",
     "contentType": "application/json",
     "payload": JSON.stringify(payload)
   };
-  
+
   return UrlFetchApp.fetch(url,options);
 }
 
 
 
-// This script was created by Sophie Shoemaker Updated: 06/20/2020 
-
-
-
+// This script was created by Sophie Shoemaker Updated: 06/20/2020
